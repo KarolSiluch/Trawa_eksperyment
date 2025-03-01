@@ -7,7 +7,8 @@ class AssetsManager:
     def init(cls):
         cls._assets = {
             'player': {
-                'idle': Animation(cls.import_cut_graphics((5, 1), 'assets/game/player/idle.png'), animation_speed=7)
+                'idle': Animation(cls.import_cut_graphics((5, 1), 'assets/game/player/idle.png'), animation_speed=7),
+                'run': Animation(cls.import_cut_graphics((4, 1), 'assets/game/player/run.png'), animation_speed=9)
             },
             'tiles': {
                 'wall': cls.import_cut_graphics((3, 4), 'assets/game/tiles/walls.png')

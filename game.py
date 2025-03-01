@@ -3,6 +3,7 @@ import time
 from screen import ScreenSettings
 import sys
 from gameplay.gameplay import Gameplay as Game
+from gameplay.events import EventsManager
 
 
 def Render_Text(screen: pygame.Surface, what: str, color, where):
@@ -16,6 +17,9 @@ class Gameplay:
         self._running: bool = True
         self._clock: pygame.Clock = pygame.time.Clock()
         self._previous_time = time.time()
+
+        self._events = EventsManager
+
         self._screen_settings = ScreenSettings()
 
         self.gameplay = Game()
@@ -26,6 +30,24 @@ class Gameplay:
     def interpret_events(self, event: pygame.Event) -> None:
         if event.type == pygame.QUIT:
             self.close()
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_w:
+                self._events.key_down('w')
+            if event.key == pygame.K_a:
+                self._events.key_down('a')
+            if event.key == pygame.K_s:
+                self._events.key_down('s')
+            if event.key == pygame.K_d:
+                self._events.key_down('d')
+        if event.type == pygame.KEYUP:
+            if event.key == pygame.K_w:
+                self._events.key_up('w')
+            if event.key == pygame.K_a:
+                self._events.key_up('a')
+            if event.key == pygame.K_s:
+                self._events.key_up('s')
+            if event.key == pygame.K_d:
+                self._events.key_up('d')
 
     def update(self, dt):
         self.gameplay.update(dt)

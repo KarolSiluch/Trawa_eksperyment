@@ -81,9 +81,9 @@ class ButtonManager:
         ]
 
         pos = (80, self._screen_settings.get_height() // 2 - 100)
-        self._arrow_up = ArrowButton(arrow, pos, 0, lambda: self.change_id(1))
+        self._arrow_up = ArrowButton(arrow, pos, 0, lambda: self.change_id(-1))
         pos = (80, self._screen_settings.get_height() // 2 + 100)
-        self._arrow_down = ArrowButton(pygame.transform.flip(arrow, False, True), pos, 1, lambda: self.change_id(-1))
+        self._arrow_down = ArrowButton(pygame.transform.flip(arrow, False, True), pos, 1, lambda: self.change_id(1))
 
         self._button_id = int(len(self._buttons) / 2)
 

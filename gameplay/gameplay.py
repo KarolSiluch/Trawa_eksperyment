@@ -15,7 +15,7 @@ class Gameplay:
         groups = gp.GroupsPicker().get_groups(gp.GroupType.Visible)
         player_assets = self._assets.get('player')
         player_pos = {'center': self.current_map.player_start_position}
-        self.player: Player = Player(groups, 'player', player_assets, 'idle', **player_pos)
+        self.player: Player = Player(groups, 'player', player_assets, **player_pos)
 
     def new_map(self, map):
         self.transiton.new_map(map)

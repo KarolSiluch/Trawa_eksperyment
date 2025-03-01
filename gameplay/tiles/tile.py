@@ -13,6 +13,9 @@ class Tile(Foundation):
             self._sort_y_offset = sort_y_offset
             self._render_offset = pygame.Vector2()
 
+        def set_visibility(self, visible=True):
+            self._show = visible
+
         def rotate(self, angle: int):
             self._image = pygame.transform.rotate(self._image, angle)
 
@@ -55,12 +58,3 @@ class Tile(Foundation):
 
     def update(self, dt):
         self.sprite.update()
-
-
-class Entity(Tile):
-    def __init__(self, groups, type: str, image: pygame.Surface, sort_y_offset: int = 0,
-                 offgrid_tile: bool = False, **pos: tuple[int]) -> None:
-        super().__init__(groups, type, image, sort_y_offset, offgrid_tile, **pos)
-        self.direction = pygame.Vector2()
-        self.velocity = 150
-        self.acceleration = pygame.Vector2()
