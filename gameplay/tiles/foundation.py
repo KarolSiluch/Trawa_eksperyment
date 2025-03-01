@@ -1,7 +1,7 @@
 class Foundation:
     def __init__(self, groups, type: str, offgrid_tile: bool = False) -> None:
         self.__g = {}
-        self.type = type
+        self.tile_type = type
         self.offgrid_tile = offgrid_tile
         self.__add_to_groups__(groups, offgrid_tile)
 

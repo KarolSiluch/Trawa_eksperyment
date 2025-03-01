@@ -48,7 +48,7 @@ class Tile(Foundation):
     def __init__(self, groups, type: str, image: pygame.Surface, sort_y_offset: int = 0,
                  offgrid_tile: bool = False, z=5, special_flags=0, **pos: tuple[int]) -> None:
         self.sprite = self.Sprite(image, sort_y_offset, **pos)
-        self.hitbox: pygame.FRect = image.get_frect(**pos).inflate(0, -0.6 * image.get_height())
+        self.hitbox: pygame.FRect = image.get_frect(**pos)
         self.z = z
         self.special_flags = special_flags
         super().__init__(groups, type, offgrid_tile)

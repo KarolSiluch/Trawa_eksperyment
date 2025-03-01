@@ -9,7 +9,7 @@ class Gameplay:
     def __init__(self) -> None:
         AssetsManager.init()
         self._assets = AssetsManager()
-        self.current_map = MapManager(self, 16, 'map', 0)
+        self.current_map = MapManager(self, 16, 'map1', 0)
         self.transiton = Transition(self)
 
         groups = gp.GroupsPicker().get_groups(gp.GroupType.Visible)

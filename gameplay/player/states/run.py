@@ -15,7 +15,7 @@ class PlayerRunState(BasicState):
         tilemap = self._groups_picker.get_group(gp.GroupType.Collidable)
         collisions: list[Tile] = tilemap.get_collisions(self._context)
         for tile in collisions:
-            if tile.type not in self._collidable_sprites:
+            if tile.tile_type not in self._collidable_sprites:
                 continue
             if direction.x > 0:
                 self._context.hitbox.right = tile.hitbox.left
@@ -25,7 +25,7 @@ class PlayerRunState(BasicState):
         self._context.hitbox.y += direction.y * self._context.velocity * dt
         collisions: list[Tile] = tilemap.get_collisions(self._context)
         for tile in collisions:
-            if tile.type not in self._collidable_sprites:
+            if tile.tile_type not in self._collidable_sprites:
                 continue
             if direction.y > 0:
                 self._context.hitbox.bottom = tile.hitbox.top

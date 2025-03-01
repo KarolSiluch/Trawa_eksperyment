@@ -6,7 +6,8 @@ from gameplay.tiles.visible_sprites import YSortCamera
 import gameplay.tiles.groups_picker as gp
 import gameplay.mouse.mouse as mouse
 from screen import ScreenSettings
-from gameplay.assets_manager import AssetsManager
+from random import randint
+from gameplay.grass.grass import GrassManager, GrassTile
 
 
 class MapManager:
@@ -18,7 +19,9 @@ class MapManager:
         self.map = map
         self.sprite_groups = {
             gp.GroupType.Visible: YSortCamera(tile_size),
-            gp.GroupType.Collidable: TileMap(tile_size)
+            gp.GroupType.Collidable: TileMap(tile_size),
+            gp.GroupType.Grass: GrassManager(tile_size)
+
         }
         gp.GroupsPicker.init(self.sprite_groups)
         self._groups_piscker = gp.GroupsPicker()
@@ -27,19 +30,16 @@ class MapManager:
 
         self.player_start_position = (0, 0)
 
-        groups = self._groups_picker.get_groups(gp.GroupType.Visible, gp.GroupType.Collidable)
-        image = AssetsManager().get('tiles', 'wall')[7]
-        Tile(groups, 'wall', image, topleft=(32, 32))
-        self.load(f'{map}.json', stage)
+        self.load(f'{map}.json')
 
     def enter(self):
         gp.GroupsPicker.init(self.sprite_groups)
 
-    def load(self, path, stage):
+    def load(self, path):
         with open(path, 'r') as f:
             map_date = json.load(f)
             for tile_data in map_date['tilemap']:
-                self.create_tile(tile_data, stage)
+                self.create_tile(tile_data)
 
     def create_tile(self, tile_data):
         type = tile_data['type']
@@ -50,20 +50,25 @@ class MapManager:
 
         if type in {'wall'}:
             groups = self._groups_picker.get_groups(gp.GroupType.Visible, gp.GroupType.Collidable)
-            image = self.game.assets[type][variant]
+            image = self.game._assets.get('tiles', type)[variant]
             Tile(groups, type, image, offgrid_tile=offgrid_tile, z=layer, **pos)
 
         elif type == 'player':
             self.player_start_position = list(pos.values())[0]
 
+        elif type == 'grass':
+            groups = self._groups_picker.get_groups(gp.GroupType.Visible, gp.GroupType.Grass)
+            GrassTile(groups, 'grass', randint(5, 9), [0, 1, 2, 3, 5], -16, **pos)
+
         else:
             groups = self._groups_picker.get_groups(gp.GroupType.Visible)
-            image = self.game.assets[type][variant]
+            image = self.game._assets.get('tiles', type)[variant]
             Tile(groups, type, image, offgrid_tile=offgrid_tile, z=layer, **pos)
 
     def update(self, dt):
         self.get_camera_offset()
         mouse.InGameMouse.update(self.camera_offset)
+        self.sprite_groups[gp.GroupType.Grass].update(dt, self.game.player.hitbox.midbottom)
 
     def get_camera_offset(self):
         mouse_vector = self._coursor.mouse_vector(self.game.player.hitbox.center)
