@@ -5,12 +5,10 @@ from gameplay.player.states.basic_state import BasicState
 class PlayerIdleState(BasicState):
     def _enter(self):
         super()._enter()
-        self.context.direction *= 0
+        self._context.direction *= 0
 
     def next_state(self):
-        if self.context.direction.magnitude():
-            print(self.possible_next_states)
-            print('run' in self.possible_next_states)
+        if self._player_direction.magnitude():
             return 'run'
 
     def update(self, dt, *args):
@@ -20,4 +18,4 @@ class PlayerIdleState(BasicState):
         direction = pygame.Vector2(dx, dy)
         if direction.magnitude():
             direction.normalize_ip()
-        self.context.direction = direction
+        self._player_direction = direction

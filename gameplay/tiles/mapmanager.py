@@ -27,7 +27,7 @@ class MapManager:
 
         self.player_start_position = (0, 0)
 
-        groups = self._groups_picker.get_groups(gp.GroupType.Visible)
+        groups = self._groups_picker.get_groups(gp.GroupType.Visible, gp.GroupType.Collidable)
         image = AssetsManager().get('tiles', 'wall')[7]
         Tile(groups, 'wall', image, topleft=(32, 32))
         self.load(f'{map}.json', stage)

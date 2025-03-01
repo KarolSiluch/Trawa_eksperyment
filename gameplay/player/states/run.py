@@ -11,28 +11,28 @@ class PlayerRunState(BasicState):
         self._groups_picker = gp.GroupsPicker()
 
     def move(self, dt, direction: pygame.Vector2):
-        self.context.hitbox.x += direction.x * self.context.velocity * dt
+        self._context.hitbox.x += direction.x * self._context.velocity * dt
         tilemap = self._groups_picker.get_group(gp.GroupType.Collidable)
-        collisions: list[Tile] = tilemap.get_collisions(self.context)
+        collisions: list[Tile] = tilemap.get_collisions(self._context)
         for tile in collisions:
             if tile.type not in self._collidable_sprites:
                 continue
             if direction.x > 0:
-                self.context.hitbox.right = tile.hitbox.left
+                self._context.hitbox.right = tile.hitbox.left
             elif direction.x < 0:
-                self.context.hitbox.left = tile.hitbox.right
+                self._context.hitbox.left = tile.hitbox.right
 
-        self.context.hitbox.y += direction.y * self.context.velocity * dt
-        collisions: list[Tile] = tilemap.get_collisions(self.context)
+        self._context.hitbox.y += direction.y * self._context.velocity * dt
+        collisions: list[Tile] = tilemap.get_collisions(self._context)
         for tile in collisions:
             if tile.type not in self._collidable_sprites:
                 continue
             if direction.y > 0:
-                self.context.hitbox.bottom = tile.hitbox.top
+                self._context.hitbox.bottom = tile.hitbox.top
             elif direction.y < 0:
-                self.context.hitbox.top = tile.hitbox.bottom
+                self._context.hitbox.top = tile.hitbox.bottom
 
-        self.context.sprite.pos = self.context.hitbox.center
+        self._context.sprite.pos = self._context.hitbox.center
 
     def update(self, dt):
         super().update(dt)
@@ -41,9 +41,9 @@ class PlayerRunState(BasicState):
         direction = pygame.Vector2(dx, dy)
         if direction.magnitude():
             direction.normalize_ip()
-        self.context.direction = direction
+        self._player_direction = direction
         self.move(dt, direction)
 
     def next_state(self):
-        if not self.context.direction.magnitude():
+        if not self._player_direction.magnitude():
             return 'idle'
