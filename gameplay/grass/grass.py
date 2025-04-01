@@ -64,8 +64,9 @@ class GrassManager(TileMap):
 
     def update(self, dt, player_center: pygame.Vector2):
         self.apply_force(player_center, 15, 5)
-        for tile in self.grid_tiles_around(player_center, 16):
-            tile.update(dt)
+        for bullet in gp.GroupsPicker().get_group(gp.GroupType.Bullets).offgrid_tiles:
+            self.apply_force(bullet.hitbox.center, 7, 1)
+        super().update(dt, player_center)
 
 
 class GrassAssets:
@@ -124,7 +125,7 @@ class GrassTile(Tile):
 
         for blade_id, blade in enumerate(self._blades):
             grid_point_x = self._location[0] + blade[0][0]
-            grid_point_y = self._location[1] + blade[0][1]
+            grid_point_y = self._location[1] + blade[0][1] - 10
             # print((self.hitbox.right + self.padding, self.hitbox.top + self.padding), force_point)
             distance = self.get_distance((grid_point_x, grid_point_y), force_point)
             if distance < force_radius:

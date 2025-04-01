@@ -5,10 +5,10 @@ import time
 from screen import ScreenSettings
 
 
-def Render_Text(screen: pygame.Surface, what: str, color, where):
-    font = pygame.font.Font(None, 30)
-    text = font.render(what, True, pygame.Color(color))
-    screen.blit(text, where)
+# def Render_Text(screen: pygame.Surface, what: str, color, where):
+#     font = pygame.font.Font(None, 30)
+#     text = font.render(what, True, pygame.Color(color))
+#     screen.blit(text, where)
 
 
 class Background:

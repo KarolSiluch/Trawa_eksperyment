@@ -48,6 +48,12 @@ class Gameplay:
                 self._events.key_up('s')
             if event.key == pygame.K_d:
                 self._events.key_up('d')
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            if event.button == 1:
+                self._events.key_down('mouse1')
+        if event.type == pygame.MOUSEBUTTONUP:
+            if event.button == 1:
+                self._events.key_up('mouse1')
 
     def update(self, dt):
         self.gameplay.update(dt)
@@ -63,7 +69,7 @@ class Gameplay:
         while self._running:
             for event in pygame.event.get():
                 self.interpret_events(event)
-            self._clock.tick(300)
+            self._clock.tick(400)
             dt = time.time() - self._previous_time
             self._previous_time = time.time()
             self.update(dt)

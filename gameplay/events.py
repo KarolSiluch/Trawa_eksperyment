@@ -1,5 +1,5 @@
 class EventsManager:
-    _events = {'w': False, 's': False, 'a': False, 'd': False}
+    _events = {'w': False, 's': False, 'a': False, 'd': False, 'mouse1': False}
 
     @classmethod
     def key_down(cls, key):

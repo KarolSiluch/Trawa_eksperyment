@@ -47,7 +47,7 @@ class TileMap:
         return tiles
 
     def update(self, dt, player_center, *args):
-        for tile in self.all_tiles_around(player_center, 16):
+        for tile in self.all_tiles_around(player_center, 20):
             tile.update(dt, *args)
 
     def get_collisions(self, obj: Tile, radius: int = 1):

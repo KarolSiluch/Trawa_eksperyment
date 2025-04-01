@@ -11,7 +11,8 @@ class AssetsManager:
                 'run': Animation(cls.import_cut_graphics((4, 1), 'assets/game/player/run.png'), animation_speed=9)
             },
             'weapons': {
-                'ak': cls.load_image('assets/game/weapons/ak.png')
+                'ak': cls.load_image('assets/game/weapons/ak.png'),
+                'bullet': cls.load_image('assets/game/weapons/bullet.png')
             },
             'tiles': {
                 'wall': cls.import_cut_graphics((3, 4), 'assets/game/tiles/walls.png'),
