@@ -8,5 +8,6 @@ W praktyce sama symulacja wygląda następująco:
 https://youtu.be/S3_GDXF9Amo
 
 Sposób w który jest to zaimplementowany jest na tyle wydajny, że jestem w stanie płynnie symulować nawet 150000 zdziebeł trawy jednocześnie:
-https://youtu.be/-LsolTy1QPk
+https://youtu.be/-LsolTy1QPk.
+
 W każdej z kratek znajduje się dokładnie 1000 zdziebeł trawy.
