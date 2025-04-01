@@ -1,6 +1,6 @@
 Jest to program eksperymentalny. Głównym celem było napisanie interaktywnej trawy, ale rozwinęło się to też do przerobienia sposobu interakcji między elementami gry i niższymi warstwami projektu.
 
-Ze względu na swoją prędkość, python raczej nie nadaje się do symulowania dużej ilości obiektów. Samo narysowanie 1000 obiektów na ekranie jest da pythona zbyt wymagające, nie wspominając o dodaniu dodatkowej logiki.
+Ze względu na swoją prędkość, python raczej nie nadaje się do symulowania dużej ilości obiektów. Samo narysowanie 1000 obiektów na ekranie jest już zbyt wymagające, nie wspominając o dodaniu dodatkowej logiki.
 Żeby python wytrzymał, trzeba było obejść sam sposób rysoania. Źdźbła trawy dzielę na powtarzające się grupy, dzięki czemu generując jedną grupę mogę ją narysować w wielu miejscach. Zauważenie powtarzających się wariantów
 jest ciężkie a pozwala zaoszczędzić dużo obliczeń.
 
